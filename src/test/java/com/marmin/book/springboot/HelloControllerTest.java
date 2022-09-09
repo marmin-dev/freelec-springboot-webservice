@@ -18,11 +18,13 @@ public class HelloControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void hello가_리턴된다() throws  Exception{
+    public void hello가_리턴된다() throws Exception {
         String hello = "hello";
 
         mvc.perform(get("/hello")).andExpect(status().isOk()).andExpect(content().string(hello));
     }
+
+
 
     @Test
     public void helloDto가_리턴된다() throws Exception{

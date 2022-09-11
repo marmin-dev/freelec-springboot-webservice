@@ -1,4 +1,4 @@
-package com.marmin.book.springboot;
+package com.marmin.book.springboot.web;
 
 import com.marmin.book.springboot.web.HelloController;
 import org.junit.jupiter.api.Test;

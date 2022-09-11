@@ -1,4 +1,4 @@
-package com.marmin.book.springboot.dto;
+package com.marmin.book.springboot.web.dto;
 
 import com.marmin.book.springboot.web.Dto.HelloResponseDto;
 import org.junit.jupiter.api.Test;

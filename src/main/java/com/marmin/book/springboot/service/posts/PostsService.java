@@ -5,7 +5,6 @@ import com.marmin.book.springboot.domain.posts.PostsRepository;
 import com.marmin.book.springboot.web.Dto.PostsResponseDto;
 import com.marmin.book.springboot.web.Dto.PostsSaveRequestDto;
 import com.marmin.book.springboot.web.Dto.PostsUpdateRequestDto;
-import javafx.geometry.Pos;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

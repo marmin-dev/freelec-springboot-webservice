@@ -10,6 +10,10 @@
                 <input type="text" class = "form-control"
                        id="id" value="{{post.id}}" readonly>
             </div>
+            <div class ="form-group">
+                <label for="title">제목</label>
+                <input type ="text" class="form-control" id ="title"> value="{{post.title}}">
+            </div>
             <div class="form-group">
                 <label for ="author">작성자</label>
                 <input type ="text" class = "form-control" id="author"
@@ -20,6 +24,8 @@
                 <textarea class = "form-control" id="content">{{post.content}}</textarea>
             </div>
         </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button type ="button" class="btn btn-primary" id="btn-update">수정완료</button>
     </div>
 </div>
 {{layout/footer}}

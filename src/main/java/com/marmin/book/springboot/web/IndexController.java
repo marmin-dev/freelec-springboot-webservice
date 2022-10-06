@@ -1,5 +1,6 @@
 package com.marmin.book.springboot.web;
 
+import com.marmin.book.springboot.config.auth.dto.SessionUser;
 import com.marmin.book.springboot.service.posts.PostsService;
 import com.marmin.book.springboot.web.Dto.PostsResponseDto;
 import com.sun.org.apache.xml.internal.security.Init;
@@ -10,14 +11,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
     private final PostsService postsService;
-
+    private final HttpSession httpSession;
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("posts",postsService.findAllDesc());
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if(user != null){
+            model.addAttribute("userName",user.getName());
+        }
         return "index";
     }
 

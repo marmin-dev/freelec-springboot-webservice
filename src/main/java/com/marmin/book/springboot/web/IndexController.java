@@ -1,9 +1,11 @@
 package com.marmin.book.springboot.web;
 
+import com.marmin.book.springboot.config.auth.LoginUser;
 import com.marmin.book.springboot.config.auth.dto.SessionUser;
 import com.marmin.book.springboot.service.posts.PostsService;
 import com.marmin.book.springboot.web.Dto.PostsResponseDto;
 import com.sun.org.apache.xml.internal.security.Init;
+import javafx.geometry.Pos;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +20,23 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
     private final PostsService postsService;
     private final HttpSession httpSession;
-    @GetMapping("/")
-    public String index(Model model){
-        model.addAttribute("posts",postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        if(user != null){
-            model.addAttribute("userName",user.getName());
-        }
-        return "index";
+//    @GetMapping("/")
+//    public String index(Model model){
+//        model.addAttribute("posts",postsService.findAllDesc());
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+//        if(user != null){
+//            model.addAttribute("userName",user.getName());
+//        }
+//        return "index";
+//    }
+@GetMapping("/")
+public String index(Model model, @LoginUser SessionUser user) {
+    model.addAttribute("posts", postsService.findAllDesc());
+    if (user != null) {
+        model.addAttribute("userName", user.getName());
     }
+    return "index";
+}
 
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id,Model model){
@@ -40,4 +50,6 @@ public class IndexController {
         return "posts-save";
     }
 
-}
+    }
+
+

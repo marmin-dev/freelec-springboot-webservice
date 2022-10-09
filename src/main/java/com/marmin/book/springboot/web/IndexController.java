@@ -31,6 +31,9 @@ public class IndexController {
 //    }
 @GetMapping("/")
 public String index(Model model, @LoginUser SessionUser user) {
+    //@LoginUser SessionUser user
+    //기존에 (User) httpSession.getAttribute("user")로 가져오던 세션 정보 값이 개선 되었습니다
+    //이제는 어느 컨트롤러든지 @LoginUser 만 사용하면 세션 정보를 가져올 수 있게 되었습니다.
     model.addAttribute("posts", postsService.findAllDesc());
     if (user != null) {
         model.addAttribute("userName", user.getName());

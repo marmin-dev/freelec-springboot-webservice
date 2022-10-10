@@ -26,7 +26,10 @@ public class OAuthAttributes {
     }
 
     public static OAuthAttributes of( String registrationId ,String userNameAttributeName,Map<String,Object> attributes) {
-        //of OAuth2User에서 반환하는 사용자 정보는 Map 이기 때문에 값 하나하나를 변환해야만 합니다.
+        //of OAuth2User에서 반환하는 사용자 정보는 Map 이기 때문에 값 하나하나를 변환해야만 합니다
+        if("naver".equals(registrationId)){
+            return ofNaver("id",attributes);
+        }
         return ofGoogle(userNameAttributeName,attributes);
     }
 
@@ -36,6 +39,17 @@ public class OAuthAttributes {
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
                 .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String,Object> attributes){
+        Map<String,Object> response = (Map<String, Object>) attributes.get("response");
+
+        return OAuthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .picture((String) response.get("profile_image"))
+                .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
@@ -51,4 +65,6 @@ public class OAuthAttributes {
                 .role(Role.GUEST)
                 .build();
     }
+
+
 }
